@@ -8,6 +8,6 @@ public interface PersonService {
     void savePerson(Person person);
     List<Person> getAllPerson();
     Person getPersonByName(String name);
-    Person updatePersonById(Long id);
+    Person updatePersonById(Long id,Person person);
     String deletePersonById(Long id);             //- Адам очсо бардык нерсе очот
 }

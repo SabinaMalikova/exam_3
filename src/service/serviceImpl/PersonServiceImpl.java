@@ -52,16 +52,17 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person updatePersonById(Long id) {
+    public Person updatePersonById(Long id, Person person) {
         try {
             for (int i = 0; i < DataBase.people.size(); i++) {
                 Person person = DataBase.people.get(i);
                 if (person.getId().equals(id)) {
                     DataBase.people.set(i, person);
+                    person.setId(id);
                     return person;
                 }
             }
-            throw new MyException("нет еловека с таким Id ");
+            throw new MyException("нет человека с таким Id");
         } catch (MyException e) {
             System.out.println(e.getMessage());
         }
