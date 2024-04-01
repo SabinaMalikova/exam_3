@@ -11,11 +11,12 @@ public class Main {
         boolean exit = false;
         while (!exit) {
             System.out.println("""
-                    savePerson()
-                    getAllPerson()
-                    getPersonByName()
-                    updatePersonById()
-                    deletePersonById()
+                    1.savePerson()
+                    2.getAllPerson()
+                    3.getPersonByName()
+                    4.updatePersonById()
+                    5.deletePersonById()
+                    6.exit
                     """);
             switch (new Scanner(System.in).nextLine()){
                 case "1": {
@@ -50,6 +51,10 @@ public class Main {
                 case "5":{
                     System.out.println("введите Id: ");
                     System.out.println(personService.deletePersonById(new Scanner(System.in).nextLong()));
+                    break;
+                }
+                case "6":{
+                    exit = true;
                     break;
                 }
             }
