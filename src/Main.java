@@ -79,35 +79,35 @@ public class Main {
                     }
                     case "6"->{
                         SocialMedia socialMedia = new SocialMedia();
-                        System.out.println("write name");
+                        System.out.println("Введите имя");
                         socialMedia.setName(new Scanner(System.in).nextLine());
                         socialMedia.setId(GeneratedId.getMediaId());
                         System.out.println(socialMediaService.saveSocialMedia(socialMedia));
                     }
                     case "7"->{
-                        System.out.println("write person id ");
+                        System.out.println("Введите id человека ");
                         Long id = new Scanner(System.in).nextLong();
-                        System.out.println("write social media id ");
+                        System.out.println("Введите id social media  ");
                         Long mediaId = new Scanner(System.in).nextLong();
                         socialMediaService.assignSocialMediaToPerson(id,mediaId);
                     }
                     case "8"->{
-                        System.out.println("write social media id ");
+                        System.out.println("Введите id social media  ");
                         Long mediaId = new Scanner(System.in).nextLong();
                         System.out.println(socialMediaService.getSocialMediaById(mediaId));
                     }
                     case "9"->{
-                        System.out.println("write person id ");
+                        System.out.println("Введите id человека  ");
                         Long id = new Scanner(System.in).nextLong();
                         System.out.println(socialMediaService.getAllSocialMediaByPersonId(id));
                     }
                     case "10"->{
-                        System.out.println("write person id ");
+                        System.out.println("Введите id человека  ");
                         Long id = new Scanner(System.in).nextLong();
                         socialMediaService.deleteAllSocialMediaByPersonId(id);
                     }
                     case "11"->{
-                        System.out.println("write social media id ");
+                        System.out.println("Введите id social media  ");
                         Long mediaId = new Scanner(System.in).nextLong();
                         socialMediaService.deleteSocialMediaById(mediaId);
                     }

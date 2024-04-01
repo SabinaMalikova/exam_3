@@ -1,5 +1,4 @@
 package dao.daoImpl;
-
 import dao.CarDao;
 import dataBase.DataBase;
 import model.Car;
