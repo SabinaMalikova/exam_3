@@ -31,7 +31,7 @@ public class CarDaoImpl implements CarDao {
     public Car getCarById(Long id) {
         for (Person person : DataBase.people) {
             for (Car car : person.getCars()) {
-                if (car.getId().equals(id)) {
+                if (person.getId().equals(id)) {
                     return car;
                 }
 

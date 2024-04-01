@@ -1,10 +1,8 @@
 package dao.daoImpl;
-
 import dao.SocialMediaDao;
 import dataBase.DataBase;
 import model.Person;
 import model.SocialMedia;
-
 import java.util.List;
 
 public class SocialMediaDaoImpl implements SocialMediaDao {
@@ -36,7 +34,6 @@ public class SocialMediaDaoImpl implements SocialMediaDao {
             if (socialMedia.getId().equals(id)) {
                 return socialMedia;
             }
-
         }
         throw new RuntimeException("не найдено");
     }
