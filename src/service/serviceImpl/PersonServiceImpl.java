@@ -52,13 +52,13 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person updatePersonById(Long id, Person person) {
+    public Person updatePersonById(Long id, Person person1) {
         try {
             for (int i = 0; i < DataBase.people.size(); i++) {
                 Person person = DataBase.people.get(i);
                 if (person.getId().equals(id)) {
-                    DataBase.people.set(i, person);
-                    person.setId(id);
+                    DataBase.people.set(i, person1);
+                    person1.setId(id);
                     return person;
                 }
             }
