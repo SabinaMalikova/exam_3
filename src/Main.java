@@ -73,11 +73,6 @@ public class Main {
                     break;
                 }
                 case "4": {
-                    System.out.println("Введите id: ");
-                    personService.updatePersonById(new Scanner(System.in).nextLong());
-                    break;
-                }
-                case "5": {
                     Person person = new Person();
                     System.out.println("новое имя: ");
                     person.setFirstName(scanner.nextLine());
@@ -115,7 +110,12 @@ public class Main {
                         }
                     }
                     person.setAge(age);
-                    System.out.println("введите Id: ");
+                    System.out.println("Введите id: ");
+                    personService.updatePersonById(new Scanner(System.in).nextLong());
+                    break;
+                }
+                case "5": {
+                    System.out.println("введите ID: ");
                     System.out.println(personService.deletePersonById(new Scanner(System.in).nextLong()));
                     break;
                 }
