@@ -17,6 +17,7 @@ public class PersonServiceImpl implements PersonService {
             for (Person person1 : DataBase.people) {
                 if (person1.getFirstName().equalsIgnoreCase(person.getFirstName()) && person1.getLastName().equalsIgnoreCase(person.getLastName())) {
                     isTrue = true;
+                    break;
                 }
             }
             if (!isTrue) {
