@@ -111,7 +111,7 @@ public class Main {
                     }
                     person.setAge(age);
                     System.out.println("Введите id: ");
-                    personService.updatePersonById(new Scanner(System.in).nextLong(),person);
+                    System.out.println(personService.updatePersonById(new Scanner(System.in).nextLong(), person));
                     break;
                 }
                 case "5": {
