@@ -23,8 +23,9 @@ public class PersonServiceImpl implements PersonService {
             if (!isTrue) {
                 DataBase.people.add(person);
                 System.out.println("успешно добавлено");
+            } else {
+                throw new MyException("такой человек с ФиО уже существует");
             }
-            throw new MyException("такой человек с ФиО уже существует");
         } catch (MyException e) {
             System.out.println(e.getMessage());
         }
