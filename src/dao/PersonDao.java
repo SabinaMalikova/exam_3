@@ -1,11 +1,10 @@
-package service;
+package dao;
 
-import model.Car;
 import model.Person;
 
 import java.util.List;
 
-public interface PersonService {
+public interface PersonDao {
     void savePerson(Person person);
     List<Person> getAllPerson();
     Person getPersonByName(String name);

@@ -1,12 +1,16 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Person {
-    //id, firstName, LastName, age,email
     private Long id;
     private String firstName;
-    private String lastName;
-    private int age;
+    private String LastName;
+    private int age ;
     private String email;
+    private List<Car> cars = new ArrayList<>();
+    private List<SocialMedia> socialMedia = new ArrayList<>();
 
     public Person() {
     }
@@ -14,7 +18,7 @@ public class Person {
     public Person(Long id, String firstName, String lastName, int age, String email) {
         this.id = id;
         this.firstName = firstName;
-        this.lastName = lastName;
+        LastName = lastName;
         this.age = age;
         this.email = email;
     }
@@ -36,11 +40,11 @@ public class Person {
     }
 
     public String getLastName() {
-        return lastName;
+        return LastName;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        LastName = lastName;
     }
 
     public int getAge() {
@@ -59,14 +63,32 @@ public class Person {
         this.email = email;
     }
 
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
+
+    public List<SocialMedia> getSocialMedia() {
+        return socialMedia;
+    }
+
+    public void setSocialMedia(List<SocialMedia> socialMedia) {
+        this.socialMedia = socialMedia;
+    }
+
     @Override
     public String toString() {
-        return "\nPerson{" +
+        return "Person{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", LastName='" + LastName + '\'' +
                 ", age=" + age +
                 ", email='" + email + '\'' +
+                ", cars=" + cars +
+                ", socialMedia=" + socialMedia +
                 '}';
     }
 }

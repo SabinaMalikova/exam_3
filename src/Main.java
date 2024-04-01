@@ -1,131 +1,157 @@
 import dataBase.GeneratedId;
+import model.Car;
 import model.Person;
+import model.SocialMedia;
+import service.CarService;
 import service.PersonService;
+import service.SocialMediaService;
+import service.serviceImpl.CarServiceImpl;
 import service.serviceImpl.PersonServiceImpl;
+import service.serviceImpl.SocialMediaServiceImpl;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         PersonService personService = new PersonServiceImpl();
-        boolean exit = false;
-        Scanner scanner = new Scanner(System.in);
-        while (!exit) {
-            System.out.println("""
-                1.savePerson()
-                2.getAllPerson()
-                3.getPersonByName()
-                4.updatePersonById()
-                5.deletePersonById()
-                6.exit
-                """);
-            switch (scanner.nextLine()) {
-                case "1": {
-                    Person person = new Person();
-                    System.out.println("имя: ");
-                    person.setFirstName(scanner.nextLine());
-                    System.out.println("фамилия: ");
-                    person.setLastName(scanner.nextLine());
-                    System.out.println("email: ");
-                    String email = scanner.nextLine();
-                    boolean isTrue = false;
-                    while (!isTrue) {
-                        try {
-                            if (email.contains("@")) {
-                                isTrue = true;
-                            } else {
-                                throw new IllegalArgumentException("должен содержать @ ");
-                            }
-                        } catch (IllegalArgumentException e) {
-                            System.err.println(e.getMessage());
-                            email = scanner.nextLine();
-                        }
+        CarService carService = new CarServiceImpl();
+        SocialMediaService socialMediaService = new SocialMediaServiceImpl();
+
+        try {
+            while (true) {
+                System.out.println("""
+                        1. save person                                       
+                        2. get all person                 
+                        3. get person by name             
+                        4. update person bu id                    
+                        5. deleted person by id    
+                        6. save media                             
+                        7. assign media to person
+                        8. get social media by id  
+                        9. get all media 
+                        10. delete media by person id
+                        11. delete media by id
+                        12. save car
+                        13. get car by person id
+                        14. update car by id
+                        15. delete cr=ar by id   
+                             """);
+                switch (new Scanner(System.in).nextLine()) {
+                    case "1" -> {
+                        Person person = new Person();
+                        System.out.println("Введите имя ");
+                        person.setFirstName(new Scanner(System.in).nextLine());
+                        System.out.println("Введите фамилию");
+                        person.setLastName(new Scanner(System.in).nextLine());
+                        System.out.println("Введите возраст");
+                        person.setAge(new Scanner(System.in).nextInt());
+                        System.out.println("Введите email");
+                        person.setEmail(new Scanner(System.in).nextLine());
+                        person.setId(GeneratedId.getPersonId());
+                        personService.savePerson(person);
                     }
-                    person.setEmail(email);
-                    System.out.println("age: ");
-                    int age = 0;
-                    boolean isTrue1 = false;
-                    while (!isTrue1) {
-                        try {
-                            age = Integer.parseInt(scanner.nextLine());
-                            if (age > 0 && age < 100) {
-                                isTrue1 = true;
-                            } else {
-                                throw new IllegalArgumentException("неверное значение");
-                            }
-                        } catch (IllegalArgumentException e) {
-                            System.err.println(e.getMessage());
-                        }
+                    case "2" -> {
+                        System.out.println(personService.getAllPerson());
                     }
-                    person.setAge(age);
-                    person.setId(GeneratedId.genPersonId());
-                    System.out.println("личный ID: " + person.getId());
-                    personService.savePerson(person);
-                    break;
-                }
-                case "2": {
-                    System.out.println(personService.getAllPerson());
-                    break;
-                }
-                case "3": {
-                    System.out.println("Введите имя: ");
-                    System.out.println(personService.getPersonByName(scanner.nextLine()));
-                    break;
-                }
-                case "4": {
-                    Person person = new Person();
-                    System.out.println("новое имя: ");
-                    person.setFirstName(scanner.nextLine());
-                    System.out.println("новая фамилия: ");
-                    person.setLastName(scanner.nextLine());
-                    System.out.println("новый email: ");
-                    String email = scanner.nextLine();
-                    boolean isTrue = false;
-                    while (!isTrue) {
-                        try {
-                            if (email.contains("@")) {
-                                isTrue = true;
-                            } else {
-                                throw new IllegalArgumentException("должен содержать @ ");
-                            }
-                        } catch (IllegalArgumentException e) {
-                            System.err.println(e.getMessage());
-                            email = scanner.nextLine();
-                        }
+                    case "3" -> {
+                        System.out.println("Введите имя");
+                        System.out.println(personService.getPersonByName(new Scanner(System.in).nextLine()));
                     }
-                    person.setEmail(email);
-                    System.out.println("age: ");
-                    int age = 0;
-                    boolean isTrue1 = false;
-                    while (!isTrue1) {
-                        try {
-                            age = Integer.parseInt(scanner.nextLine());
-                            if (age > 0 && age < 100) {
-                                isTrue1 = true;
-                            } else {
-                                throw new IllegalArgumentException("неверное значение");
-                            }
-                        } catch (IllegalArgumentException e) {
-                            System.err.println(e.getMessage());
-                        }
+                    case "4" -> {
+                        System.out.println("Введите ID человека которого нужно обновить");
+                        Long id = new Scanner(System.in).nextLong();
+                        Person person = new Person();
+                        System.out.println("Введите новое имя");
+                        person.setFirstName(new Scanner(System.in).nextLine());
+                        System.out.println("Введите фамилию");
+                        person.setLastName(new Scanner(System.in).nextLine());
+                        System.out.println("Введите возраст");
+                        person.setAge(new Scanner(System.in).nextInt());
+                        System.out.println("Введите email");
+                        person.setEmail(new Scanner(System.in).nextLine());
+                        System.out.println(personService.updatePersonById(id, person));
                     }
-                    person.setAge(age);
-                    System.out.println("Введите id: ");
-                    System.out.println(personService.updatePersonById(new Scanner(System.in).nextLong(), person));
-                    break;
-                }
-                case "5": {
-                    System.out.println("введите ID: ");
-                    System.out.println(personService.deletePersonById(new Scanner(System.in).nextLong()));
-                    break;
-                }
-                case "6": {
-                    exit = true;
-                    break;
+                    case "5" -> {
+                        System.out.println("Введите ID человека которого нужно удалить");
+                        Long id = new Scanner(System.in).nextLong();
+                        System.out.println(personService.deletePersonById(id));
+                    }
+                    case "6"->{
+                        SocialMedia socialMedia = new SocialMedia();
+                        System.out.println("write name");
+                        socialMedia.setName(new Scanner(System.in).nextLine());
+                        socialMedia.setId(GeneratedId.getMediaId());
+                        System.out.println(socialMediaService.saveSocialMedia(socialMedia));
+                    }
+                    case "7"->{
+                        System.out.println("write person id ");
+                        Long id = new Scanner(System.in).nextLong();
+                        System.out.println("write social media id ");
+                        Long mediaId = new Scanner(System.in).nextLong();
+                        socialMediaService.assignSocialMediaToPerson(id,mediaId);
+                    }
+                    case "8"->{
+                        System.out.println("write social media id ");
+                        Long mediaId = new Scanner(System.in).nextLong();
+                        System.out.println(socialMediaService.getSocialMediaById(mediaId));
+                    }
+                    case "9"->{
+                        System.out.println("write person id ");
+                        Long id = new Scanner(System.in).nextLong();
+                        System.out.println(socialMediaService.getAllSocialMediaByPersonId(id));
+                    }
+                    case "10"->{
+                        System.out.println("write person id ");
+                        Long id = new Scanner(System.in).nextLong();
+                        socialMediaService.deleteAllSocialMediaByPersonId(id);
+                    }
+                    case "11"->{
+                        System.out.println("write social media id ");
+                        Long mediaId = new Scanner(System.in).nextLong();
+                        socialMediaService.deleteSocialMediaById(mediaId);
+                    }
+                    case "12" -> {
+                        Car car = new Car();
+                        System.out.println("Введите имя ");
+                        car.setName(new Scanner(System.in).nextLine());
+                        System.out.println("Введите model");
+                        car.setModel(new Scanner(System.in).nextLine());
+                        System.out.println("Введите год выпуска ");
+                        car.setYear(LocalDate.of(new Scanner(System.in).nextInt(), new Scanner(System.in).nextInt(), new Scanner(System.in).nextInt()));
+                        car.setId(GeneratedId.getCarId());
+                        System.out.println("Введите id человека");
+                        Long id = new Scanner(System.in).nextLong();
+                        carService.saveCar(id, car);
+                    }
+                    case "13" -> {
+                        System.out.println("Введите id человека");
+                        Long id = new Scanner(System.in).nextLong();
+                        System.out.println(carService.getCarById(id));
+                    }
+                    case "14" -> {
+                        Car car = new Car();
+                        System.out.println("Введите id машины ");
+                        Long id = new Scanner(System.in).nextLong();
+                        System.out.println("Введите новое имя");
+                        car.setName(new Scanner(System.in).nextLine());
+                        System.out.println("Введите model");
+                        car.setModel(new Scanner(System.in).nextLine());
+                        System.out.println("Введите год выпуска ");
+                        car.setYear(LocalDate.of(new Scanner(System.in).nextInt(), new Scanner(System.in).nextInt(), new Scanner(System.in).nextInt()));
+                        carService.updateCarById(id, car);
+                    }
+                    case "15" -> {
+                        System.out.println("Введите id машины  ");
+                        Long id = new Scanner(System.in).nextLong();
+                        System.out.println(carService.deleteCarById(id));
+                    }
                 }
             }
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(" exception ");
         }
-
     }
-
 }
